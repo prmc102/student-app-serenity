@@ -1,9 +1,12 @@
 package com.studentapp.studentinfo;
 
 import com.studentapp.testbase.TestBase;
+import net.serenitybdd.junit.runners.SerenityParameterizedRunner;
 import net.thucydides.core.annotations.Steps;
 import net.thucydides.core.annotations.Title;
+import net.thucydides.junit.annotations.UseTestDataFrom;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +14,8 @@ import java.util.List;
 /**
  * Created by Jay
  */
+@UseTestDataFrom("src/test/java/resources/testdata/studentinfo.csv")
+@RunWith(SerenityParameterizedRunner.class)
 public class CreateStudentDataDrivenTest extends TestBase {
 
     private String firstName;
@@ -29,6 +34,7 @@ public class CreateStudentDataDrivenTest extends TestBase {
         List<String> courses = new ArrayList<>();
         courses.add(course1);
         courses.add(course2);
+        studentSteps.createStudent(firstName, lastName, email, programme, courses).log().all().statusCode(201);
 
     }
 
